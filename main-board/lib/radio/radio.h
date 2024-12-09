@@ -23,7 +23,7 @@ public:
       return;
     }
 
-    rf24.setPALevel(RF24_PA_MIN);
+    rf24.setPALevel(RF24_PA_HIGH);
     rf24.setDataRate(RF24_250KBPS);
     rf24.enableDynamicPayloads();
 

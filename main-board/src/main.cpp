@@ -39,7 +39,8 @@ void convertReceivedDataAndSend()
 
   if (isPublished)
   {
-    Serial.println("Message published");
+    Serial.println(date.getISOTime());
+    Serial.println(" - Message published");
   }
   else
   {
@@ -69,8 +70,8 @@ void setup()
 
   mqtt.subscribeTopic(SENSORS_THERMOMETER_TOPIC);
 
-  pinMode(D2, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(D2), irqHandler, FALLING);
+  pinMode(D4, INPUT_PULLUP);
+  attachInterrupt(digitalPinToInterrupt(D4), irqHandler, FALLING);
 }
 
 void loop()
