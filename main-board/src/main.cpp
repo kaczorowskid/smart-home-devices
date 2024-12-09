@@ -63,10 +63,10 @@ void setup()
 {
   esp32.initSerial(9600);
   esp32.initWifi();
-  mqtt.initMqtt();
+  mqtt.init();
   mqtt.connectToMqttBroker();
-  date.initDate();
-  radio.initRadio(RF24_ADDR);
+  date.init();
+  radio.init(RF24_ADDR);
 
   mqtt.subscribeTopic(SENSORS_THERMOMETER_TOPIC);
 
