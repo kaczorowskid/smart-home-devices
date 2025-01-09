@@ -17,7 +17,7 @@ float Adc::readVoltage()
 
   rawValue /= SAMPLES;
 
-  float voltage = (rawValue * REFERENCE_VOLTAGE / 1023.0) * VOLTAGE_DIVIDER;
+  float voltage = rawValue * (REFERENCE_VOLTAGE / 1023.0) * VOLTAGE_DIVIDER;
 
   return voltage;
 }

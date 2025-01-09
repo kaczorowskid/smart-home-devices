@@ -10,7 +10,7 @@ void Radio::init(const byte address[6])
     return;
   }
 
-  rf24.setPALevel(RF24_PA_HIGH);
+  rf24.setPALevel(RF24_PA_MAX);
   rf24.setDataRate(RF24_250KBPS);
   rf24.enableDynamicPayloads();
 

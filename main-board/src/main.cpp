@@ -1,5 +1,7 @@
 #include <SPI.h>
 #include <ArduinoJson.h>
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
 #include "esp32.h"
 #include "date.h"
 #include "radio.h"
@@ -13,6 +15,7 @@ Date date;
 Radio radio;
 Mqtt mqtt;
 Utils utils;
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 bool dataReady = false;
 String receivedString;
@@ -39,8 +42,13 @@ void convertReceivedDataAndSend()
 
   if (isPublished)
   {
+    Serial.print("Message published - ");
     Serial.println(date.getISOTime());
-    Serial.println(" - Message published");
+    lcd.setCursor(0, 1);
+    lcd.print(date.getFormattedTime());
+    lcd.setCursor(7, 1);
+    lcd.print("ID: ");
+    lcd.print(deviceId);
   }
   else
   {
@@ -61,6 +69,12 @@ IRAM_ATTR void irqHandler(void)
 
 void setup()
 {
+  Wire.begin(D2, D1);
+  lcd.init();
+  lcd.backlight();
+  lcd.setCursor(0, 0);
+  lcd.print("MQTT connecting");
+
   esp32.initSerial(9600);
   esp32.initWifi();
   mqtt.init();
@@ -69,6 +83,9 @@ void setup()
   radio.init(RF24_ADDR);
 
   mqtt.subscribeTopic(SENSORS_THERMOMETER_TOPIC);
+
+  lcd.setCursor(0, 0);
+  lcd.print("MQTT connected!");
 
   pinMode(D4, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(D4), irqHandler, FALLING);

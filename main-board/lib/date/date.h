@@ -16,5 +16,6 @@ public:
 
   void init();
   String getISOTime();
+  String getFormattedTime();
 };
 #endif

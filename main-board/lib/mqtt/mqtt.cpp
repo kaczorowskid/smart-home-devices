@@ -1,6 +1,6 @@
 #include "mqtt.h"
 
-Mqtt::Mqtt(const char *clientId = "ESP32Client")
+Mqtt::Mqtt(const char *clientId)
     : pubSubClient(wifiClient), clientId(clientId) {}
 
 void Mqtt::init()

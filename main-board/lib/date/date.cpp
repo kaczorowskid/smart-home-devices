@@ -20,3 +20,15 @@ String Date::getISOTime()
 
   return String(buffer);
 }
+
+String Date::getFormattedTime()
+{
+  timeClient.update();
+  time_t now = timeClient.getEpochTime();
+  struct tm *timeinfo = localtime(&now);
+
+  char buffer[6];
+  strftime(buffer, sizeof(buffer), "%H:%M", timeinfo);
+
+  return String(buffer);
+}
